@@ -20,8 +20,10 @@
     "expo-image-picker": "^14.1.1",
     "expo-location": "~15.1.1",
     "expo-status-bar": "~1.4.4",
+    "firebase": "^9.18.0",
     "geo-location": "^0.0.4",
     "geolocation": "^0.2.0",
+    "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.4",
@@ -32,7 +34,8 @@
     "react-native-web": "~0.18.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@tailwindcss/forms": "^0.5.3"
   },
   "private": true
 }

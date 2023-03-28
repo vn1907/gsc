@@ -28,7 +28,7 @@ function ViewMap() {
 
 const Tab = createBottomTabNavigator();
 
- const Navigator = () => {
+ const Nav = () => {
 
   async  function  GetCurrentLocation () {
     let { status } = await Location.requestPermissionsAsync();
@@ -91,4 +91,4 @@ const Tab = createBottomTabNavigator();
   );
 };
 
-export default Navigator;
+export default Nav;

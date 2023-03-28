@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Nav from './Navigator.js';
+import Nav from './NavigatorHome.js';
+import SignUpScreen from './SignUpScreen.js';
+import LoginScreen from './LoginScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +18,7 @@ const HomeScreen = ({navigation}) => {
       <TouchableOpacity
       style={styles.button} 
       onPress={() =>
-        navigation.navigate('Main')}
+        navigation.navigate('Login')}
       ><Text>Let's go</Text></TouchableOpacity>
       
     </View>
@@ -32,6 +34,8 @@ const MyStack = () => {
           component={HomeScreen}
           options={{title: 'Welcome'}}
         />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Main" component={Nav} />
       </Stack.Navigator>
     </NavigationContainer>

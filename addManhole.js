@@ -47,7 +47,13 @@ export default function UploadManhole() {
       <Text>Upload picture: </Text>
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, margin: 10, }} />}
       <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity onPress={openCamera} style={{ backgroundColor: 'steelblue', margin:5, alignItems: 'center', height:50, width: 150 }} >
+      <TouchableOpacity onPress={openCamera} style={{    backgroundColor: '#2196F3',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    margin: 5}} >
       
         <Text style={{ color: '#fff', padding: 10 }}>Open Camera</Text>
       </TouchableOpacity>
@@ -63,7 +69,13 @@ export default function UploadManhole() {
         </TextInput>
       )}
       <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity onPress={pickLocation} style={{backgroundColor: 'steelblue', margin: 5,  alignItems: 'center', height:50, width: 150 }}>
+      <TouchableOpacity onPress={pickLocation} style={{    backgroundColor: '#2196F3',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8, 
+    margin: 5, }}>
         <Text style={{ color: '#fff', padding: 10,}}>Access location</Text>
       </TouchableOpacity>
       </View>
