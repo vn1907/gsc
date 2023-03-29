@@ -1,11 +1,45 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useState } from 'react-native';
+import { useEffect } from 'react';
+import * as Location from "expo-location";
 
 export default function ViewMapLoc() {
+  //const [loc, setLoc] = useState(null);
+  async  function  GetCurrentLocation () {
+    let { status } = await Location.requestPermissionsAsync();
+
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission not granted",
+        "Allow the app to use location service.",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
+    }
+
+    let { coords } = await Location.getCurrentPositionAsync();
+    //setLocation(coords);
+    console.log(coords);
+
+    if (coords) {
+      const { latitude, longitude } = coords;
+      //let address = `${latitude}, ${logitude}`;
+      alert(latitude +' '+ longitude);
+
+    }
+  };
+  
+  useEffect(() => {
+    setTimeout(() =>{
+        GetCurrentLocation();
+  }, 1000);
+}, []);
+
+
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} />
+      <MapView style={styles.map}  showsUserLocation={true} />
     </View>
   );
 }

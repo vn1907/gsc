@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 
 
 export default function UploadManhole() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [location, setLocation] = useState(null);
 
   const openCamera = async () => {
