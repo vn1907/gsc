@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
@@ -38,21 +38,21 @@ export default function App() {
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     console.log(newPhoto.uri)
     setPhoto(newPhoto);
+    
+    pickLocation();
+
   };
 
   if (photo) {
-    
 
-    let savePhoto = () => {
-      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-        setPhoto(undefined);
-      });
-    };
+      let savePhoto = () => {
+        console.log('submitttt');
+      };
 
     return (
       <SafeAreaView style={styles.container}>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
-        {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
+        {hasMediaLibraryPermission ? <Button title="Submit" onPress={savePhoto} /> : undefined}
         <Button title="Discard" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );
@@ -67,6 +67,7 @@ export default function App() {
 
     let locationResult = await Location.getCurrentPositionAsync({});
     setLocation(locationResult);
+    console.log(locationResult);
   };
 
   return (
@@ -78,16 +79,6 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
     </Camera>
-
-    <View style={{ marginBottom: 30}}>
-        <Text>Location:</Text>
-        {location && (
-        <TextInput editable={false} style={{borderWidth: 1, padding: 10,}}>
-          {location.coords.latitude}, {location.coords.longitude}
-        </TextInput>
-      )}
-     
-      </View>
     </View>
   );
 }
