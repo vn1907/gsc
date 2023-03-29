@@ -1,30 +1,62 @@
-import React, { useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, TextInput } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, TextInput, TouchableHighlight } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
-import {Camera} from "expo-camera";
 
 
-export default function UploadManhole() {
-  const [image, setImage] = useState("");
+export default function App() {
+  let cameraRef = useRef();
+  const [hasCameraPermission, setHasCameraPermission] = useState();
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
+  const [photo, setPhoto] = useState();
   const [location, setLocation] = useState(null);
 
-  const openCamera = async () => {
-    let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+  useEffect(() => {
+    (async () => {
+      const cameraPermission = await Camera.requestCameraPermissionsAsync();
+      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+      setHasCameraPermission(cameraPermission.status === "granted");
+      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
+    })();
+  }, []);
 
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera is required!');
-      return;
-    }
+  if (hasCameraPermission === undefined) {
+    return <Text>Requesting permissions...</Text>
+  } else if (!hasCameraPermission) {
+    return <Text>Permission for camera not granted. Please change this in settings.</Text>
+  }
 
-    let result = await ImagePicker.launchCameraAsync();
-    console.log(result);
+  let takePic = async () => {
+    let options = {
+      quality: 1,
+      base64: true,
+      exif: false
+    };
 
-    if (!result.cancelled) {
-      console.log(result.uri);
-      setImage(result.uri);
-    }
+    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    console.log(newPhoto.uri)
+    setPhoto(newPhoto);
   };
+
+  if (photo) {
+    
+
+    let savePhoto = () => {
+      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+        setPhoto(undefined);
+      });
+    };
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+        {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
+        <Button title="Discard" onPress={() => setPhoto(undefined)} />
+      </SafeAreaView>
+    );
+  }
 
   const pickLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -37,54 +69,41 @@ export default function UploadManhole() {
     setLocation(locationResult);
   };
 
-  const submitData = () => {
-    // handle submit logic here
-    console.log('Image:', image);
-    console.log('Location:', location);
-  };
-
   return (
-    <View style={{ flex: 2, justifyContent: 'center' ,margin: 30 }}>
-      <View style={{marginBottom: 50,}}>
+    <View>
       <Text>Upload picture: </Text>
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, margin: 10, }} />}
-      <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity onPress={openCamera} style={{    backgroundColor: '#2196F3',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    margin: 5}} >
-      
-        <Text style={{ color: '#fff', padding: 10 }}>Open Camera</Text>
-      </TouchableOpacity>
+    <Camera style={styles.container} ref={cameraRef}>
+      <View style={styles.buttonContainer}>
+        <Button title="Take Pic" onPress={takePic} />
       </View>
-      
-      </View>
+      <StatusBar style="auto" />
+    </Camera>
 
-      <View style={{ marginBottom: 30}}>
+    <View style={{ marginBottom: 30}}>
         <Text>Location:</Text>
         {location && (
         <TextInput editable={false} style={{borderWidth: 1, padding: 10,}}>
           {location.coords.latitude}, {location.coords.longitude}
         </TextInput>
       )}
-      <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity onPress={pickLocation} style={{    backgroundColor: '#2196F3',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 8, 
-    margin: 5, }}>
-        <Text style={{ color: '#fff', padding: 10,}}>Access location</Text>
-      </TouchableOpacity>
+     
       </View>
-      </View>
-
-      <Button title="Submit" onPress={submitData} disabled={!image || !location} />
-
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+
+    width: 300,
+    height: 400,
+  },
+  buttonContainer: {
+    backgroundColor: '#fff',
+    alignSelf: 'flex-end'
+  },
+  preview: {
+    alignSelf: 'stretch',
+    flex: 1,
+  }
+});
