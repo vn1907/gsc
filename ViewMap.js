@@ -1,5 +1,5 @@
 import React from 'react';
-import MapView from 'react-native-maps';
+import MapView , {Marker}from 'react-native-maps';
 import { StyleSheet, View, useState } from 'react-native';
 import { useEffect } from 'react';
 import * as Location from "expo-location";
@@ -39,7 +39,14 @@ export default function ViewMapLoc() {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}  showsUserLocation={true} />
+      <MapView style={styles.map}  showsUserLocation={true}>
+      <Marker
+            coordinate={{latitude: 17.4593039,
+            longitude: 78.4331369,
+          }}
+         />
+
+      </MapView>
     </View>
   );
 }

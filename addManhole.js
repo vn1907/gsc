@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, Image, TouchableOpacity, TextInput } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
+import {Camera} from "expo-camera";
 
 
 export default function UploadManhole() {
@@ -20,6 +21,7 @@ export default function UploadManhole() {
     console.log(result);
 
     if (!result.cancelled) {
+      console.log(result.uri);
       setImage(result.uri);
     }
   };
@@ -83,9 +85,6 @@ export default function UploadManhole() {
 
       <Button title="Submit" onPress={submitData} disabled={!image || !location} />
 
-      <View style={{ alignItems: 'flex-end', }}>
-      <TouchableOpacity style={{ margin: 10, backfaceVisibility: 'visible', backgroundColor: 'lime', padding:10 }}><Text>Home</Text></TouchableOpacity>
-      </View>
     </View>
   );
 }
