@@ -4,9 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from './firebaseConfig';
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
-import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
-import {useNavigation} from '@react-navigation/native';
 
 export default function App() {
   let cameraRef = useRef();
@@ -44,12 +42,6 @@ export default function App() {
   };
 
   if (photo) {
-
-
-      function savePhoto () {
-        console.log("submitt");
-        Alert.alert("Successfully submitted");
-       }
     function urlToBlob(url) {
       return new Promise((resolve, reject) => {
           var xhr = new XMLHttpRequest();
@@ -64,7 +56,7 @@ export default function App() {
           xhr.send();
       })
     
-
+    }
     let uploadPhoto = async () => {
       const metadata = {
         contentType: 'image/jpeg',
@@ -79,8 +71,6 @@ export default function App() {
           });
         })
       })
-
-      
       console.log('submitttt');
     };
 
@@ -88,7 +78,7 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
 
-        {hasMediaLibraryPermission ? <Button title="Confirm" onPress={uploadPhoto} /> : undefined}
+        <Button title="Confirm" onPress={uploadPhoto} />
         <Button title="Discard" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );

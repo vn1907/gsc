@@ -1,15 +1,23 @@
 import React from 'react';
 import MapView , {Marker}from 'react-native-maps';
-import { StyleSheet, View, useState } from 'react-native';
-import { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useEffect,useState } from 'react';
 import * as Location from "expo-location";
 
 export default function ViewMapLoc() {
+  const [long, setLong] = useState(null);
+  const data= [
+    {
+
+      latitude: 17.45,
+      longitude: 78.43,
+    },
+    {
+      latitude: 17.44,
+      longitude: 78.49,
+    },
+  ]
   async  function  GetCurrentLocation () {
-    //const [loc, setLoc] = useState({
-    //  longitude: 17,
-    //  latitude: 74,
-    //});
     console.log('1');
     let { status } = await Location.requestPermissionsAsync();
 
@@ -23,13 +31,13 @@ export default function ViewMapLoc() {
     }
     console.log('2');
     let { coords } = await Location.getCurrentPositionAsync();
-    //setLocation(coords.latitude, coords.longitude);
+    setLong(coords);
     console.log(coords);
 
     if (coords) {
       const { latitude, longitude } = coords;
       //let address = `${latitude}, ${logitude}`;
-      alert(latitude +' '+ longitude);
+      console.log(latitude +' '+ longitude);
 
     }
   };
@@ -41,15 +49,17 @@ export default function ViewMapLoc() {
 }, []);
 
 
+
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}  showsUserLocation={true}>
-      <Marker
-            coordinate={{latitude: 17.4593039,
-            longitude: 78.4331369,
-          }}
+      <MapView style={styles.map}  showsUserLocation={true} >
+      {data.map((item,key) => (<Marker key={key}
+            coordinate={{latitude: item.latitude, longitude: item.longitude}
+          }
          />
-
+         )
+      )
+      }
       </MapView>
     </View>
   );
