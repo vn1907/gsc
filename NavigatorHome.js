@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ViewMapLoc from './ViewMap.js';
-import { useEffect } from 'react';
-import * as Location from "expo-location";
 import UpdateManhole from './addManhole.js';
 
 function AddManhole() {
