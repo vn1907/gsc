@@ -1,9 +1,10 @@
 import React from 'react';
-import MapView , {Marker}from 'react-native-maps';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import MapView , {Marker, Callout}from 'react-native-maps';
+import { StyleSheet, View, Text } from 'react-native';
+import { WebView } from 'react-native-webview';
 import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
-import {db, auth, addDoc, collection, getDocs, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
+import {db, collection, getDocs, } from "./firebaseConfig"
 
 export default function ViewMapLoc() {
   const location = useRef("");
@@ -11,6 +12,7 @@ export default function ViewMapLoc() {
   const data = useRef([{
         latitude: 17.44,
         longitude: 78.49,
+        imageUrl: "",
       }]);
   const mapRef = useRef("");
   // const data= [
@@ -59,7 +61,7 @@ export default function ViewMapLoc() {
       });
       data.current = manholeData
       //setData(manholeData)
-      mapRef
+      mapRef;
       console.log("Documents successfully retrieved");
       console.log(data.current)
     } catch(error) {
@@ -86,7 +88,14 @@ export default function ViewMapLoc() {
         {data.current.map((item,key) => (<Marker key={key}
               coordinate={{latitude: item.latitude, longitude: item.longitude}
             }
-          />
+          >
+            <Callout>
+              <View>
+                <Text>{item.email}</Text>
+                <WebView style={styles.preview} source={{ uri: item.imageUrl }} resizeMode="cover" />
+              </View>
+            </Callout>
+          </Marker>
           )
         )
         }
@@ -103,5 +112,9 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '90%',
+  },
+  preview: {
+    width: 300,
+    height: 400,
   },
 });
