@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
 signOut } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAryUeSGefFoHrOA0j7PBzroCm1BpLfqTk",
@@ -14,26 +15,30 @@ const firebaseConfig = {
   storageBucket: "solutionchallenge23-3597e.appspot.com",
   messagingSenderId: "1083442959990",
   appId: "1:1083442959990:web:901c30687c81572c7b3157",
-  measurementId: "G-P185KXTDN4"
+  measurementId: "G-P185KXTDN4",
 };
 
-// Initialize Firebase
+// Initializing Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Authentication and get a reference to the service
+// Initializing Firebase Authentication
 const auth = getAuth(app);
 
-// Initialize Cloud Firestore and get a reference to the service
+// Initializing Cloud Firestore 
 const db = getFirestore(app);
+
+// Initializing Cloud Storage in Firebase 
+const storage = getStorage(app);
 
 export {
   db,
   app,
   auth,
   addDoc,
+  signOut,
+  storage,
   collection,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
 };
