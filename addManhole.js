@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from './firebaseConfig';
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
+import {db, auth, addDoc, collection, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 import * as Location from 'expo-location';
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [photo, setPhoto] = useState();
   const [location, setLocation] = useState(null);
+  const [downloadURL, setDownloadURL] = useState(null);
   const FOLDER_NAME = "manholeImages";
 
   useEffect(() => {
@@ -57,6 +59,26 @@ export default function App() {
       })
     
     }
+
+    async function uploadManholeInfo2Firebase() {
+      try {
+        console.log("Location: " + JSON.stringify(location));
+        const latitude = location["coords"].latitude;
+        const longitude = location["coords"].longitude;
+        const docRef = await addDoc(collection(db, "manholes"), {
+          email: auth.currentUser.email,
+          imageUrl: downloadURL,
+          latitude: latitude,
+          longitude: longitude,
+          acceptedBy: 1,
+          rejectedBy: 0
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+
     let uploadPhoto = async () => {
       const metadata = {
         contentType: 'image/jpeg',
@@ -67,9 +89,11 @@ export default function App() {
         uploadBytes(imageRef, blob, metadata).then(() => {
           alert("Image uploaded")
           getDownloadURL(imageRef).then((downloadURL) => {
+            setDownloadURL(downloadURL)
             console.log('File available at', downloadURL);
+            uploadManholeInfo2Firebase()
           });
-        })
+          })
       })
       console.log('submitttt');
     };
