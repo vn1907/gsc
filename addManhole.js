@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, Button, Image, Alert } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
+import { storage } from './firebaseConfig';
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
+import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
 import {useNavigation} from '@react-navigation/native';
 
@@ -10,6 +13,7 @@ export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [photo, setPhoto] = useState();
   const [location, setLocation] = useState(null);
+  const FOLDER_NAME = "manholeImages";
 
   useEffect(() => {
     (async () => {
@@ -41,15 +45,50 @@ export default function App() {
 
   if (photo) {
 
+
       function savePhoto () {
         console.log("submitt");
         Alert.alert("Successfully submitted");
+       }
+    function urlToBlob(url) {
+      return new Promise((resolve, reject) => {
+          var xhr = new XMLHttpRequest();
+          xhr.onerror = reject;
+          xhr.onreadystatechange = () => {
+              if (xhr.readyState === 4) {
+                  resolve(xhr.response);
+              }
+          };
+          xhr.open('GET', url);
+          xhr.responseType = 'blob';
+          xhr.send();
+      })
+    
+
+    let uploadPhoto = async () => {
+      const metadata = {
+        contentType: 'image/jpeg',
       };
+      const filename = photo.uri.substring(photo.uri.lastIndexOf('/') + 1);
+      urlToBlob(photo.uri).then((blob) => {
+        const imageRef = ref(storage, FOLDER_NAME + "/" + filename);
+        uploadBytes(imageRef, blob, metadata).then(() => {
+          alert("Image uploaded")
+          getDownloadURL(imageRef).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+          });
+        })
+      })
+
+      
+      console.log('submitttt');
+    };
 
     return (
       <SafeAreaView style={styles.container}>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
-        { <Button title="Submit" onPress={savePhoto} /> }
+
+        {hasMediaLibraryPermission ? <Button title="Confirm" onPress={uploadPhoto} /> : undefined}
         <Button title="Discard" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );
