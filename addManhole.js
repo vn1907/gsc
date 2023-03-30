@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from './firebaseConfig';
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
-import {db, auth, addDoc, collection, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
+import {db, auth, addDoc, collection, getDocs, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 import * as Location from 'expo-location';
 
 export default function App() {
@@ -65,6 +65,7 @@ export default function App() {
         console.log("Location: " + JSON.stringify(location));
         const latitude = location["coords"].latitude;
         const longitude = location["coords"].longitude;
+        console.log("Inside uploadManholeInfo2Firebase: " + downloadURL);
         const docRef = await addDoc(collection(db, "manholes"), {
           email: auth.currentUser.email,
           imageUrl: downloadURL,
@@ -91,7 +92,10 @@ export default function App() {
           getDownloadURL(imageRef).then((downloadURL) => {
             setDownloadURL(downloadURL)
             console.log('File available at', downloadURL);
-            uploadManholeInfo2Firebase()
+            if (downloadURL) {
+              uploadManholeInfo2Firebase()
+            }
+            
           });
           })
       })

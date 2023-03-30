@@ -1,24 +1,30 @@
 import React from 'react';
 import MapView , {Marker}from 'react-native-maps';
-import { StyleSheet, View } from 'react-native';
-import { useEffect,useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
+import {db, auth, addDoc, collection, getDocs, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 
 export default function ViewMapLoc() {
+  const location = useRef("");
   const [long, setLong] = useState(null);
-  const data= [
-    {
+  const data = useRef([{
+        latitude: 17.44,
+        longitude: 78.49,
+      }]);
+  const mapRef = useRef("");
+  // const data= [
+  //   {
 
-      latitude: 17.45,
-      longitude: 78.43,
-    },
-    {
-      latitude: 17.44,
-      longitude: 78.49,
-    },
-  ]
+  //     latitude: 17.45,
+  //     longitude: 78.43,
+  //   },
+  //   {
+  //     latitude: 17.44,
+  //     longitude: 78.49,
+  //   },
+  // ]
   async  function  GetCurrentLocation () {
-    console.log('1');
     let { status } = await Location.requestPermissionsAsync();
 
     if (status !== "granted") {
@@ -29,9 +35,9 @@ export default function ViewMapLoc() {
         { cancelable: false }
       );
     }
-    console.log('2');
     let { coords } = await Location.getCurrentPositionAsync();
     setLong(coords);
+    location.current = coords;
     console.log(coords);
 
     if (coords) {
@@ -41,26 +47,51 @@ export default function ViewMapLoc() {
 
     }
   };
+
+  async function getManholeData() {
+    console.log("Inside getManholeData")
+    const manholeData = []
+    try {
+      const querySnapshot = await getDocs(collection(db, "manholes"));
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        manholeData.push(doc.data());
+      });
+      data.current = manholeData
+      //setData(manholeData)
+      mapRef
+      console.log("Documents successfully retrieved");
+      console.log(data.current)
+    } catch(error) {
+      console.error("Error getting document: ", error);
+    }
+    
+  }
   
   useEffect(() => {
     setTimeout(() =>{
         GetCurrentLocation();
   }, 1000);
-}, []);
+    setTimeout(() =>{
+      getManholeData();
+  }, 1000);
+  }, []);
 
 
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}  showsUserLocation={true} >
-      {data.map((item,key) => (<Marker key={key}
-            coordinate={{latitude: item.latitude, longitude: item.longitude}
-          }
-         />
-         )
-      )
-      }
-      </MapView>
+      <View>
+        <MapView ref={mapRef} style={styles.map} showsUserLocation={true} >
+        {data.current.map((item,key) => (<Marker key={key}
+              coordinate={{latitude: item.latitude, longitude: item.longitude}
+            }
+          />
+          )
+        )
+        }
+        </MapView>
+      </View>
     </View>
   );
 }
@@ -71,6 +102,6 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: '90%',
   },
 });

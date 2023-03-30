@@ -5,7 +5,7 @@ import {
   onAuthStateChanged, 
   signInWithEmailAndPassword,
 signOut } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore, getDocs } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -35,6 +35,7 @@ export {
   app,
   auth,
   addDoc,
+  getDocs,
   signOut,
   storage,
   collection,
