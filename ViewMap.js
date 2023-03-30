@@ -5,8 +5,12 @@ import { useEffect } from 'react';
 import * as Location from "expo-location";
 
 export default function ViewMapLoc() {
-  //const [loc, setLoc] = useState(null);
   async  function  GetCurrentLocation () {
+    //const [loc, setLoc] = useState({
+    //  longitude: 17,
+    //  latitude: 74,
+    //});
+    console.log('1');
     let { status } = await Location.requestPermissionsAsync();
 
     if (status !== "granted") {
@@ -17,9 +21,9 @@ export default function ViewMapLoc() {
         { cancelable: false }
       );
     }
-
+    console.log('2');
     let { coords } = await Location.getCurrentPositionAsync();
-    //setLocation(coords);
+    //setLocation(coords.latitude, coords.longitude);
     console.log(coords);
 
     if (coords) {

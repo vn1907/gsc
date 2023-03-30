@@ -13,7 +13,7 @@ const LocationPermission = () => {
         "Permission not granted",
         "Allow the app to use location service.",
         [{ text: "OK" }],
-        { cancelable: false }
+        { cancelable: true }
       );
     }
 
@@ -29,7 +29,7 @@ const LocationPermission = () => {
   
   useEffect(() => {
     setTimeout(() =>{
-        GetCurrentLocation()
+        GetCurrentLocation();
   }, 1000);
 }, []);
   return (

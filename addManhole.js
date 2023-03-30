@@ -1,24 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, Alert } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function App() {
   let cameraRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(cameraPermission.status === "granted");
-      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
 
@@ -45,14 +41,15 @@ export default function App() {
 
   if (photo) {
 
-      let savePhoto = () => {
-        console.log('submitttt');
+      function savePhoto () {
+        console.log("submitt");
+        Alert.alert("Successfully submitted");
       };
 
     return (
       <SafeAreaView style={styles.container}>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
-        {hasMediaLibraryPermission ? <Button title="Submit" onPress={savePhoto} /> : undefined}
+        { <Button title="Submit" onPress={savePhoto} /> }
         <Button title="Discard" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );
