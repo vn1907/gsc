@@ -40,7 +40,7 @@ const LoginScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg '>Email</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white '
+          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white text-white font-bold'
           onChangeText={setEmail}
           value={email}
         />
@@ -50,7 +50,7 @@ const LoginScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white '
+          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white text-white font-bold'
           onChangeText={setPassword}
           value={password}
           secureTextEntry

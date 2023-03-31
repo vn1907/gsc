@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ViewMapLoc from './ViewMap.js';
 import UpdateManhole from './addManhole.js';
-import { Button } from 'react-native-web';
+import {auth} from "./firebaseConfig"
 
 function AddManhole() {
   return (
@@ -28,19 +28,23 @@ const Tab = createBottomTabNavigator();
 
   
   return (
-    <View className="h-full">
-      <View className="items-center w-1/2">
-      <TouchableOpacity className="mt-10 flex">
-        <Text className="text-bold ">Logout</Text>
-      </TouchableOpacity>
+    <View className="h-full flex-1">
+      <View className="flex-row items-center border">
+      <View className="flex-row mt-10 mr-5 flex-1 justify-evenly">
+      <Text className="text-2xl font-bold mb-3 text-sky-900">Safe Safar</Text>
       </View>
+      <View className="justify-evenly items-end mt-10 mr-5 mb-3">
+      <MaterialCommunityIcons name="logout" size={35} color="black" />
+      </View>
+      </View>
+    
     <Tab.Navigator
     initialRouteName="View Map"
     screenOptions={{
       headerShown: false,
-      tabBarActiveTintColor: '#1B4470',
+      tabBarActiveTintColor: '#0c4a6e',
       align: 'bottom',
-      tabBarStyle: {height: 80},
+      tabBarStyle: {height: 60},
       tabBarLabelPosition: 'beside-icon',
       tabBarLabelStyle: {fontSize:15},
     }}>
@@ -52,9 +56,9 @@ const Tab = createBottomTabNavigator();
         headerShown: false,
         tabBarLabel: 'View',
         labelPosition: "beside-icon",
-        tabBarLabelStyle: {paddingLeft:35},
+        
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="map" color={color} size={40} />
+          <MaterialCommunityIcons name="map" color={color} size={30} />
         ),
       }}
     />
@@ -63,8 +67,9 @@ const Tab = createBottomTabNavigator();
       component={AddManhole}
       options={{
         tabBarLabel: 'Add',
+        
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="plus-circle-outline" color={color} size={50} />
+          <MaterialCommunityIcons name="plus-circle-outline" color={color} size={27}/>
         ),
       }}
     />

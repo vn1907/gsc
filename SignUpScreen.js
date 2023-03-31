@@ -52,7 +52,7 @@ const SignUpScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg'>Name</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white '
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white text-white font-bold'
           onChangeText={setName}
           value={name}
         />
@@ -62,7 +62,7 @@ const SignUpScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg'>Email</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white '
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white text-white font-bold'
           onChangeText={setEmail}
           value={email}
         />
@@ -72,7 +72,7 @@ const SignUpScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white'
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white text-white font-bold'
           onChangeText={setPassword}
           value={password}
           secureTextEntry
