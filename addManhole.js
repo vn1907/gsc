@@ -110,15 +110,13 @@ export default function App() {
       <SafeAreaView >
         <Image style={styles.container} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
 
-        <View className="mt-2 flex grid grid-span-2 grid-rows-1">
-        <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={takePic}>
+        <TouchableOpacity  className="bg-sky-900 hover:bg-sky-400 text-white font-bold py-2 px-4 border-b-4 border-sky-950 hover:border-blue-500 rounded-lg" onPress={() => setPhoto(undefined)}>
         <Text className="text-white text-center text-lg font-bold">Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={uploadPhoto}>
+        <TouchableOpacity  className="bg-sky-900 hover:bg-sky-400 text-white font-bold py-2 px-4 border-b-4 border-sky-950 hover:border-blue-500 rounded-lg" onPress={uploadPhoto}>
         <Text className="text-white text-center text-lg font-bold">Submit</Text>
         </TouchableOpacity>
       
-      </View>
       </SafeAreaView>
     );
   }
@@ -141,7 +139,7 @@ export default function App() {
     <Camera ref={cameraRef} style={styles.container}>
     </Camera>
     <View className="items-center mt-3">
-    <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={takePic}>
+    <TouchableOpacity  className="w-1/2 bg-sky-900 hover:bg-sky-400 text-white font-bold py-2 px-4 border-b-4 border-sky-950 hover:border-blue-500 rounded-lg" onPress={takePic}>
       <Text className="text-white text-center text-lg font-bold">Click image</Text>
       </TouchableOpacity>
       </View>
