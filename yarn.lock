@@ -5999,6 +5999,11 @@
   "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz"
   "version" "4.0.0"
 
+"escape-string-regexp@2.0.0":
+  "integrity" "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
+  "resolved" "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz"
+  "version" "2.0.0"
+
 "eslint-scope@5.1.1":
   "integrity" "sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw=="
   "resolved" "https://registry.npmjs.org/eslint-scope/-/eslint-scope-5.1.1.tgz"
@@ -7136,7 +7141,7 @@
     "default-gateway" "^4.2.0"
     "ipaddr.js" "^1.9.0"
 
-"invariant@*", "invariant@^2.2.4":
+"invariant@*", "invariant@^2.2.4", "invariant@2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -9674,6 +9679,14 @@
     "normalize-css-color" "^1.0.2"
     "postcss-value-parser" "^4.2.0"
     "styleq" "^0.1.2"
+
+"react-native-webview@^11.26.0":
+  "integrity" "sha512-4T4CKRm8xlaQDz9h/bCMPGAvtkesrhkRWqCX9FDJEzBToaVUIsV0ZOqtC4w/JSnCtFKKYiaC1ReJtCGv+4mFeQ=="
+  "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.26.0.tgz"
+  "version" "11.26.0"
+  dependencies:
+    "escape-string-regexp" "2.0.0"
+    "invariant" "2.2.4"
 
 "react-native@*", "react-native@>= 0.64.3", "react-native@0.71.4":
   "integrity" "sha512-3hSYqvWrOdKhpV3HpEKp1/CkWx8Sr/N/miCrmUIAsVTSJUR7JW0VvIsrV9urDhUj/s6v2WF4n7qIEEJsmTCrPw=="

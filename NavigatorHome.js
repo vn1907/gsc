@@ -16,9 +16,7 @@ function AddManhole() {
 
 function ViewMap() {
   return (
-
       <ViewMapLoc/>
-    
   );
 }
 
@@ -33,13 +31,15 @@ const Tab = createBottomTabNavigator();
     <Tab.Navigator
     initialRouteName="View Map"
     screenOptions={{
+      headerShown: false,
       tabBarActiveTintColor: '#e91e63',
-      align: 'bottom'
+      align: 'bottom',
     }}>
       <Tab.Screen
-      name="View Map"
+      name= 'Map'
       component={ViewMap}
       options={{
+        headerShown: false,
         tabBarLabel: 'View Map',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="map" color={color} size={size} />

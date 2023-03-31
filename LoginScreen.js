@@ -32,28 +32,34 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView className = "p-4 m-5 flex justify-center h-screen">
-      <View className='mb-4'>
+    <KeyboardAvoidingView className = "px-14 py-20 m-1 flex h-screen">
+      <View className='mb-7'>
         <Text className='font-bold mb-2 text-gray-700 '>Email</Text>
+        <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
+          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
           onChangeText={setEmail}
           value={email}
         />
+        </View>
       </View>
-      <View className='mb-4'>
+      <View className='mb-9'>
         <Text className='font-bold mb-2 text-gray-700'>Password</Text>
+        <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
+          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
           onChangeText={setPassword}
           value={password}
           secureTextEntry
         />
+        </View>
       </View>
-      <TouchableOpacity onPress={handleLoginButton} className='bg-blue-500 py-2 rounded-md my-2'>
+      <View className="items-center">
+      <TouchableOpacity onPress={handleLoginButton} className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
         <Text className='text-white text-center font-bold text-lg'>Login</Text>
       </TouchableOpacity>
-      <Text onPress={redirectToRegister} className='text-blue-500 font-bold text-lg my-2'>Don't have an account? Register </Text>
+      </View>
+      <Text onPress={redirectToRegister} className='text-blue-500 font-bold text-sm my-2'>Don't have an account? Register </Text>
     </KeyboardAvoidingView>
   )
 }

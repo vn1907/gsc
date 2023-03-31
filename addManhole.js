@@ -61,6 +61,7 @@ export default function App() {
     }
 
     async function uploadManholeInfo2Firebase() {
+      console.log("inside uploadManholeInfo2Firebase: "+location);
       try {
         console.log("Location: " + JSON.stringify(location));
         const latitude = location["coords"].latitude;
@@ -103,11 +104,11 @@ export default function App() {
     };
 
     return (
-      <SafeAreaView style={styles.container}>
-        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+      <SafeAreaView >
+        <Image style={styles.container} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
 
-        <Button title="Confirm" onPress={uploadPhoto} />
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
+        <Button title="Submit" onPress={uploadPhoto} />
+        <Button title="Cancel" onPress={() => setPhoto(undefined)} />
       </SafeAreaView>
     );
   }
@@ -121,15 +122,15 @@ export default function App() {
 
     let locationResult = await Location.getCurrentPositionAsync({});
     setLocation(locationResult);
-    console.log(locationResult);
+    
   };
 
   return (
     <View>
-      <Text>Upload picture: </Text>
-    <Camera style={styles.container} ref={cameraRef}>
-      <View style={styles.buttonContainer}>
-        <Button title="Take Pic" onPress={takePic} />
+      <Text className="mb-7 font-bold">Upload picture: </Text>
+    <Camera ref={cameraRef} style={styles.container}>
+      <View>
+        <Button title="Click image" onPress={takePic} />
       </View>
       <StatusBar style="auto" />
     </Camera>
@@ -137,18 +138,10 @@ export default function App() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-
     width: 300,
     height: 400,
   },
-  buttonContainer: {
-    backgroundColor: '#fff',
-    alignSelf: 'flex-end'
-  },
-  preview: {
-    alignSelf: 'stretch',
-    flex: 1,
-  }
-});
+})

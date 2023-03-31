@@ -13,14 +13,12 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image source={require('./assets/logo.png')} style={styles.logo} />
-      <Text style={styles.heading}>Welcome to My App</Text>
-      <Text style={styles.subheading}>Explore our features and start using the app today!</Text>
-
       <TouchableOpacity
       style={styles.button} 
       onPress={() =>
         navigation.navigate('Login')}
-      ><Text>Let's go</Text></TouchableOpacity>
+      >
+      <Text>Let's go</Text></TouchableOpacity>
       
     </View>
   );
