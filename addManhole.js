@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView,Image, TouchableOpacity } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from './firebaseConfig';
@@ -57,7 +56,6 @@ export default function App() {
           xhr.responseType = 'blob';
           xhr.send();
       })
-    
     }
 
     async function uploadManholeInfo2Firebase(downloadURL) {

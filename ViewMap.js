@@ -15,17 +15,6 @@ export default function ViewMapLoc() {
         imageUrl: "",
       }]);
   const mapRef = useRef("");
-  // const data= [
-  //   {
-
-  //     latitude: 17.45,
-  //     longitude: 78.43,
-  //   },
-  //   {
-  //     latitude: 17.44,
-  //     longitude: 78.49,
-  //   },
-  // ]
   async  function  GetCurrentLocation () {
     try{
       let { status } = await Location.requestForegroundPermissionsAsync();

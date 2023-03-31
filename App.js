@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import{useEffect} from 'react';
 import Nav from './NavigatorHome.js';
 import SignUpScreen from './SignUpScreen.js';
 import LoginScreen from './LoginScreen.js';
-import SuccessScreen from './SuccessScreen.js';
 
 const Stack = createNativeStackNavigator();
 
