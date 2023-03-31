@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Button, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, Image, TouchableOpacity } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { storage } from './firebaseConfig';
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import {db, auth, addDoc, collection, getDocs, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 import * as Location from 'expo-location';
+
 
 export default function App() {
   let cameraRef = useRef();
@@ -129,12 +130,14 @@ export default function App() {
 
   return (
     <View>
-      <Text className="mb-7 font-bold">Upload picture: </Text>
+      <Text className="mb-6 font-bold text-lg">Upload picture: </Text>
     <Camera ref={cameraRef} style={styles.container}>
-      <View>
-        <Button title="Click image" onPress={takePic} />
-      </View>
     </Camera>
+    <View className="items-center mt-3">
+    <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={takePic}>
+      <Text className="text-white text-center text-lg font-bold">Click image</Text>
+      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -142,7 +145,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    width: 300,
-    height: 400,
+    width: 380,
+    height: 450,
   },
 })

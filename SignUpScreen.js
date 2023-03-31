@@ -47,30 +47,30 @@ const SignUpScreen = () => {
     <View className="justify-between">
     <KeyboardAvoidingView className = "p-9 py-20 m-7 h-screen">
       <View className='mb-7'>
-        <Text className='font-bold mb-2 text-gray-700 text-lg'>Name</Text>
+        <Text className='font-bold mb-2 text-white text-lg'>Name</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white '
           onChangeText={setName}
           value={name}
         />
         </View>
       </View>
       <View className='mb-7'>
-        <Text className='font-bold mb-2 text-gray-700 text-lg'>Email</Text>
+        <Text className='font-bold mb-2 text-white text-lg'>Email</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white '
           onChangeText={setEmail}
           value={email}
         />
         </View>
       </View>
       <View className='mb-9'>
-        <Text className='font-bold mb-2 text-gray-700 text-lg'>Password</Text>
+        <Text className='font-bold mb-2 text-white text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white '
+          className='px-3 py-2  rounded-md text-gray-700 w-full bg-transparent border border-white'
           onChangeText={setPassword}
           value={password}
           secureTextEntry
@@ -82,7 +82,7 @@ const SignUpScreen = () => {
         <Text className='text-white text-center font-bold text-lg'>Register</Text>
       </TouchableOpacity>
       </View>
-      <Text onPress={redirectToLogin} className='text-blue-500 font-bold text-sm my-2'>Already have an account? Login </Text>
+      <Text onPress={redirectToLogin} className='text-white font-bold text-sm my-2'>Already have an account? <Text className="underline">Login</Text> </Text>
     </KeyboardAvoidingView>
     </View>
     </ImageBackground>

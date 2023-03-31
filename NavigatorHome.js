@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Text, View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ViewMapLoc from './ViewMap.js';
@@ -32,7 +31,7 @@ const Tab = createBottomTabNavigator();
     initialRouteName="View Map"
     screenOptions={{
       headerShown: false,
-      tabBarActiveTintColor: '#e91e63',
+      tabBarActiveTintColor: '#1B4470',
       align: 'bottom',
     }}>
       <Tab.Screen

@@ -41,7 +41,7 @@ const LoginScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg '>Email</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
+          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white '
           onChangeText={setEmail}
           value={email}
         />
@@ -51,7 +51,7 @@ const LoginScreen = () => {
         <Text className='font-bold mb-2 text-white text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
+          className='px-3 py-2 rounded-md text-gray-700 w-64 bg-transparent border border-white '
           onChangeText={setPassword}
           value={password}
           secureTextEntry
@@ -63,7 +63,7 @@ const LoginScreen = () => {
         <Text className='text-white text-center font-bold text-lg'>Login</Text>
       </TouchableOpacity>
       </View>
-      <Text onPress={redirectToRegister} className='text-white font-bold text-sm my-2'>Don't have an account? Register </Text>
+      <Text onPress={redirectToRegister} className='text-white font-bold text-sm my-2'>Don't have an account? <Text className="underline">Register</Text></Text>
       
     </KeyboardAvoidingView>
     </ImageBackground>
