@@ -12,7 +12,6 @@ export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [photo, setPhoto] = useState();
   const [location, setLocation] = useState(null);
-  const [downloadURL, setDownloadURL] = useState(null);
   const FOLDER_NAME = "manholeImages";
 
   useEffect(() => {
@@ -60,8 +59,7 @@ export default function App() {
     
     }
 
-    async function uploadManholeInfo2Firebase() {
-      console.log("inside uploadManholeInfo2Firebase: "+location);
+    async function uploadManholeInfo2Firebase(downloadURL) {
       try {
         console.log("Location: " + JSON.stringify(location));
         const latitude = location["coords"].latitude;
@@ -88,17 +86,21 @@ export default function App() {
       const filename = photo.uri.substring(photo.uri.lastIndexOf('/') + 1);
       urlToBlob(photo.uri).then((blob) => {
         const imageRef = ref(storage, FOLDER_NAME + "/" + filename);
-        uploadBytes(imageRef, blob, metadata).then(() => {
-          alert("Image uploaded")
-          getDownloadURL(imageRef).then((downloadURL) => {
-            setDownloadURL(downloadURL)
-            console.log('File available at', downloadURL);
-            if (downloadURL) {
-              uploadManholeInfo2Firebase()
-            }
-            
-          });
-          })
+        try {
+          uploadBytes(imageRef, blob, metadata).then(() => {
+            alert("Image uploaded")
+            getDownloadURL(imageRef).then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              if (downloadURL) {
+                uploadManholeInfo2Firebase(downloadURL)
+              } else {
+                console.log('Error getting download url');
+              }
+            })
+            })
+        } catch(error) {
+          console.log('Error uploading image to firebase storage');
+        }
       })
       console.log('submitttt');
     };
