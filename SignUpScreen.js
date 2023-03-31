@@ -1,7 +1,8 @@
-import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity } from 'react-native'
+import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import {db, auth, addDoc, collection, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 import React, {useEffect, useState} from 'react';
+import login_bg from './assets/login_bg.png';
 
 const SignUpScreen = () => {
     const [name, setName] = useState('');
@@ -42,33 +43,34 @@ const SignUpScreen = () => {
   }
 
   return (
+    <ImageBackground source={login_bg} className="h-full">
     <View className="justify-between">
-    <KeyboardAvoidingView className = "p-9 py-20 m-5 h-screen">
+    <KeyboardAvoidingView className = "p-9 py-20 m-7 h-screen">
       <View className='mb-7'>
-        <Text className='font-bold mb-2 text-gray-700'>Name</Text>
+        <Text className='font-bold mb-2 text-gray-700 text-lg'>Name</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
+          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
           onChangeText={setName}
           value={name}
         />
         </View>
       </View>
       <View className='mb-7'>
-        <Text className='font-bold mb-2 text-gray-700 '>Email</Text>
+        <Text className='font-bold mb-2 text-gray-700 text-lg'>Email</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
+          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white'
           onChangeText={setEmail}
           value={email}
         />
         </View>
       </View>
       <View className='mb-9'>
-        <Text className='font-bold mb-2 text-gray-700'>Password</Text>
+        <Text className='font-bold mb-2 text-gray-700 text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
-          className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white '
+          className='px-3 py-2 border rounded-md text-gray-700 w-full bg-white '
           onChangeText={setPassword}
           value={password}
           secureTextEntry
@@ -83,6 +85,7 @@ const SignUpScreen = () => {
       <Text onPress={redirectToLogin} className='text-blue-500 font-bold text-sm my-2'>Already have an account? Login </Text>
     </KeyboardAvoidingView>
     </View>
+    </ImageBackground>
   )
 }
 

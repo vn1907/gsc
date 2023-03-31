@@ -134,7 +134,6 @@ export default function App() {
       <View>
         <Button title="Click image" onPress={takePic} />
       </View>
-      <StatusBar style="auto" />
     </Camera>
     </View>
   );

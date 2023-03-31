@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
-import {db, collection, getDocs, } from "./firebaseConfig"
+import {db, collection, getDocs, } from "./firebaseConfig";
 
 export default function ViewMapLoc() {
   const location = useRef("");
@@ -27,7 +27,9 @@ export default function ViewMapLoc() {
   //   },
   // ]
   async  function  GetCurrentLocation () {
-    let { status } = await Location.requestPermissionsAsync();
+    try{
+      let { status } = await Location.requestForegroundPermissionsAsync();
+    
 
     if (status !== "granted") {
       Alert.alert(
@@ -48,6 +50,8 @@ export default function ViewMapLoc() {
       console.log(latitude +' '+ longitude);
 
     }
+  }
+  catch(Error){}
   };
 
   async function getManholeData() {

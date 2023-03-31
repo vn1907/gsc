@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import{useEffect} from 'react';
 import Nav from './NavigatorHome.js';
 import SignUpScreen from './SignUpScreen.js';
 import LoginScreen from './LoginScreen.js';
@@ -10,16 +11,18 @@ import SuccessScreen from './SuccessScreen.js';
 const Stack = createNativeStackNavigator();
 
 const HomeScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() =>{
+      navigation.navigate('Login')
+  }, 2000);
+  }, []);
   return (
-    <View style={styles.container}>
-      <Image source={require('./assets/logo.png')} style={styles.logo} />
-      <TouchableOpacity
-      style={styles.button} 
-      onPress={() =>
-        navigation.navigate('Login')}
-      >
-      <Text>Let's go</Text></TouchableOpacity>
-      
+    <View className="flex items-center h-full justify-center">
+      <Image source={require('./assets/logo.png')} className="w-44 h-44 mb-7" />
+      <View className="items-center">
+      <Text className="text-slate-600 text-lg font-bold">Risky roads await you on the way</Text>
+      <Text  className="text-slate-800 text-lg font-bold"> - let us be your guide.</Text>
+      </View>
     </View>
   );
 };
@@ -31,7 +34,7 @@ const MyStack = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Welcome'}}
+          options={{headerShown: false}}
         />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -41,33 +44,5 @@ const MyStack = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subheading: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  button: {
-    padding: 20,
-    margin: 50,
-    backgroundColor: '#ccc',
-  },
-});
 
 export default MyStack;

@@ -1,7 +1,8 @@
-import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity } from 'react-native'
+import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { auth, onAuthStateChanged, signInWithEmailAndPassword } from "./firebaseConfig";
+import login_bg from './assets/login_bg.png';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -32,9 +33,12 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView className = "px-14 py-20 m-1 flex h-screen">
+    <ImageBackground source={login_bg} className="h-full">
+    <KeyboardAvoidingView className = "items-center justify-center m-1 flex h-4/5">
+      
+    
       <View className='mb-7'>
-        <Text className='font-bold mb-2 text-gray-700 '>Email</Text>
+        <Text className='font-bold mb-2 text-white text-lg '>Email</Text>
         <View className="items-center">
         <TextInput
           className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
@@ -44,7 +48,7 @@ const LoginScreen = () => {
         </View>
       </View>
       <View className='mb-9'>
-        <Text className='font-bold mb-2 text-gray-700'>Password</Text>
+        <Text className='font-bold mb-2 text-white text-lg'>Password</Text>
         <View className="items-center">
         <TextInput
           className='px-3 py-2 border rounded-md text-gray-700 w-64 bg-white'
@@ -59,8 +63,10 @@ const LoginScreen = () => {
         <Text className='text-white text-center font-bold text-lg'>Login</Text>
       </TouchableOpacity>
       </View>
-      <Text onPress={redirectToRegister} className='text-blue-500 font-bold text-sm my-2'>Don't have an account? Register </Text>
+      <Text onPress={redirectToRegister} className='text-white font-bold text-sm my-2'>Don't have an account? Register </Text>
+      
     </KeyboardAvoidingView>
+    </ImageBackground>
   )
 }
 
