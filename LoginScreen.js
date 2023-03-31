@@ -1,4 +1,4 @@
-import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { auth, onAuthStateChanged, signInWithEmailAndPassword } from "./firebaseConfig";
@@ -35,8 +35,7 @@ const LoginScreen = () => {
   return (
     <ImageBackground source={login_bg} className="h-full">
     <KeyboardAvoidingView className = "items-center justify-center m-1 flex h-4/5">
-      
-    
+    <Image source={require('./assets/logo.png')} className="w-44 h-44 mb-7 mt-7" />
       <View className='mb-7'>
         <Text className='font-bold mb-2 text-white text-lg '>Email</Text>
         <View className="items-center">
@@ -59,7 +58,7 @@ const LoginScreen = () => {
         </View>
       </View>
       <View className="items-center">
-      <TouchableOpacity onPress={handleLoginButton} className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+      <TouchableOpacity onPress={handleLoginButton} className="w-1/2 bg-sky-900 hover:bg-sky-400 text-white font-bold py-2 px-4 border-b-4 border-sky-950 hover:border-blue-500 rounded-lg">
         <Text className='text-white text-center font-bold text-lg'>Login</Text>
       </TouchableOpacity>
       </View>

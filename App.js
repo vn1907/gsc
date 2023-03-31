@@ -34,12 +34,10 @@ const MyStack = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Main" component={Nav} />
-        <Stack.Screen name="SuccessScreen" component={SuccessScreen} />
+          options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false,}}/>
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false,}}/>
+        <Stack.Screen name="Main" component={Nav} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

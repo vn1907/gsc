@@ -110,8 +110,15 @@ export default function App() {
       <SafeAreaView >
         <Image style={styles.container} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
 
-        <Button title="Submit" onPress={uploadPhoto} />
-        <Button title="Cancel" onPress={() => setPhoto(undefined)} />
+        <View className="mt-2 flex grid grid-span-2 grid-rows-1">
+        <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={takePic}>
+        <Text className="text-white text-center text-lg font-bold">Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  className="w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onPress={uploadPhoto}>
+        <Text className="text-white text-center text-lg font-bold">Submit</Text>
+        </TouchableOpacity>
+      
+      </View>
       </SafeAreaView>
     );
   }

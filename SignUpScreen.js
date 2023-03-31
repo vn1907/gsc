@@ -1,4 +1,4 @@
-import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import {Text, KeyboardAvoidingView, View,TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import {db, auth, addDoc, collection, onAuthStateChanged, createUserWithEmailAndPassword} from "./firebaseConfig"
 import React, {useEffect, useState} from 'react';
@@ -44,9 +44,11 @@ const SignUpScreen = () => {
 
   return (
     <ImageBackground source={login_bg} className="h-full">
-    <View className="justify-between">
-    <KeyboardAvoidingView className = "p-9 py-20 m-7 h-screen">
+    <View className="items-center justify-center m-1 flex ">
+    <KeyboardAvoidingView className = "p-7 py-20 m-7 h-screen ">
+    
       <View className='mb-7'>
+      <Image source={require('./assets/logo.png')} className="w-44 h-44 m-7 pl-6" />
         <Text className='font-bold mb-2 text-white text-lg'>Name</Text>
         <View className="items-center">
         <TextInput
@@ -78,7 +80,7 @@ const SignUpScreen = () => {
         </View>
       </View>
       <View className="items-center">
-      <TouchableOpacity onPress={handleRegisterButton} className='w-1/2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded'>
+      <TouchableOpacity onPress={handleRegisterButton} className='w-1/2 bg-sky-900 hover:bg-sky-400 text-white font-bold py-2 px-4 border-b-4 border-sky-950 hover:border-blue-500 rounded-lg'>
         <Text className='text-white text-center font-bold text-lg'>Register</Text>
       </TouchableOpacity>
       </View>
