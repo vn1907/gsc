@@ -19,3 +19,5 @@ Technologies used:
 * React Native
 * Expo Go
 * Firebase
+
+![Untitled](https://github.com/vn1907/gsc/assets/65809147/cc7ef5b3-cd52-4c15-a311-3c153fff32a2)
